@@ -1,6 +1,6 @@
 [# Petstore RestAssured API testing 
 
-Below I have provided the project structure, how to run the project, scenarios covered and improvements I do in the future, in addition the same project has been provided in Postman
+Below I have provided the project structure, how to run the project, scenarios covered and improvements I would do in the future, in addition the same project has been provided in Postman
 
 
 ## Project Structure
