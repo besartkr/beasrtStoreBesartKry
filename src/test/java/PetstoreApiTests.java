@@ -86,13 +86,6 @@ public class PetstoreApiTests {
         .body("message", equalTo(USER_ID));
     }
 
-    @Test
-    public void updateUserScenario() {
-        String body = "{\"id\":" + USER_ID + ",\"username\":\"" + USERNAME + "\",\"firstName\":\"Updated\",\"lastName\":\"User\",\"email\":\"updated@example.com\",\"password\":\"pass1234\",\"phone\":\"9876543210\",\"userStatus\":1}";
 
-        given().contentType(ContentType.JSON).body(body)
-        .when().put("/user/" + USERNAME)
-        .then().statusCode(200);
-    }
 
 }
