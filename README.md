@@ -17,10 +17,13 @@ petstore-restassured-testng-API/
 
 ---
 
-##How to Run
-
+How to Run
+IntellIj
 2. Navigate to the project directory > srv > test > java and Run PetstoreAPITests
 ---
+Postman how to run
+Import Petstore API Demo.postman_collection.json file
+Select Collection > Run
 
 **Covered Scenarios**
 
