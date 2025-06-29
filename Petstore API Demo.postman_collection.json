@@ -1,0 +1,440 @@
+{
+	"info": {
+		"_postman_id": "92503ecf-374d-476f-9c15-19a0d1537915",
+		"name": "Petstore API Demo",
+		"description": "Minimal test suite for Petstore API with assertions on response body",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44837486",
+		"_collection_link": "https://bes-8185487.postman.co/workspace/Bes's-Workspace~9cbdb540-a34c-4b13-82e0-fe811235252b/collection/44837486-92503ecf-374d-476f-9c15-19a0d1537915?action=share&source=collection_link&creator=44837486"
+	},
+	"item": [
+		{
+			"name": "Everyhing about your Pets",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Create New Pet 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+											"const jsonData = pm.response.json();",
+											"pm.expect(jsonData.name).to.eql('Tiger');",
+											"pm.expect(jsonData.status).to.eql('available');"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"id\": 1122334455, \r\n\"name\": \"Tiger\",\r\n \"photoUrls\": [\"https://example.com/tiger.jpg\"], \r\n \"status\": \"available\"}"
+								},
+								"url": {
+									"raw": "{{base_url}}/pet",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"pet"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": []
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"item": [
+				{
+					"name": "Update Pet 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"const jsonData = pm.response.json();",
+									"pm.expect(jsonData.name).to.eql('TigerUpdated');",
+									"pm.expect(jsonData.status).to.eql('sold');"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\": 1122334455, \"name\": \r\n\"TigerUpdated\", \"photoUrls\": \r\n[\"https://example.com/tiger.jpg\"], \r\n\"status\": \"sold\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/pet",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "Delete Pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", () => pm.response.to.have.status(404));",
+									"pm.expect(pm.response.text()).to.eql('');",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pet/1122334455",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pet",
+								"1122334455"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Access Petstore order",
+			"item": [
+				{
+					"name": "Get",
+					"item": []
+				},
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Place Order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+											"const jsonData = pm.response.json();",
+											"pm.expect(jsonData.status).to.eql('placed');",
+											"pm.expect(jsonData.quantity).to.eql(2);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"id\": 998877, \"petId\": 1122, \"quantity\": 2, \"shipDate\": \"2025-06-27T00:00:00.000Z\", \"status\": \"placed\", \"complete\": true}"
+								},
+								"url": {
+									"raw": "{{base_url}}/store/order",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"store",
+										"order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Order -approved",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+											"const jsonData = pm.response.json();",
+											"pm.expect(jsonData.status).to.eql('approved');",
+											"pm.expect(jsonData.quantity).to.eql(3);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"id\": 998877, \"petId\": 1122, \"quantity\": 3, \"shipDate\": \"2025-06-28T00:00:00.000Z\", \"status\": \"approved\", \"complete\": false}"
+								},
+								"url": {
+									"raw": "{{base_url}}/store/order",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"store",
+										"order"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"item": []
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "Delete Order (Store Section)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+											"const jsonData = pm.response.json();",
+											"pm.expect(jsonData.message).to.eql('998877');"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/store/order/998877",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"store",
+										"order",
+										"998877"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Operations about User",
+			"item": [
+				{
+					"name": "Get",
+					"item": []
+				},
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Create User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+											"const jsonData = pm.response.json();",
+											"pm.expect(jsonData.message).to.eql('555');"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"id\": 555, \"username\": \"testuser1\", \"firstName\": \"Test\", \"lastName\": \"User\", \"email\": \"test@example.com\", \"password\": \"pass123\", \"phone\": \"1234567890\", \"userStatus\": 1}"
+								},
+								"url": {
+									"raw": "{{base_url}}/user",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"item": [
+						{
+							"name": "Update User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+											"const jsonData = pm.response.json();",
+											"pm.expect(pm.response.code).to.eql(200);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"id\": 555, \"username\": \"testuser1\", \"firstName\": \"Updated\", \"lastName\": \"User\", \"email\": \"updated@example.com\", \"password\": \"pass1234\", \"phone\": \"9876543210\", \"userStatus\": 1}"
+								},
+								"url": {
+									"raw": "{{base_url}}/user/testuser1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"testuser1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "Delete User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+											"const jsonData = pm.response.json();",
+											"pm.expect(jsonData.message).to.eql('testuser1');"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/user/testuser1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"testuser1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://petstore.swagger.io/v2"
+		},
+		{
+			"key": "pet_id",
+			"value": "123456789"
+		},
+		{
+			"key": "pet_name",
+			"value": "Fluffy"
+		}
+	]
+}
